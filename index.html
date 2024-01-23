@@ -3,54 +3,152 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="carousel-container">
-      <div class="carousel-slide">
-        <img src="for-emma-forever-ago.png" alt="Slide 1" />
-      </div>
-      <div class="carousel-slide">
-        <img src="bryson-tiller.jpg" alt="Slide 2" />
-      </div>
-      <div class="carousel-slide">
-        <img src="like-water-for-chocolate.png" alt="Slide 3" />
-      </div>
-    </div>
-    <button id="prevBtn">Previous</button>
-    <button id="nextBtn">Next</button>
-
-    <script>
-      let currentSlide = 0;
-
-      document.addEventListener("DOMContentLoaded", function () {
-        showSlide(currentSlide);
-      });
-
-      function showSlide(n) {
-        const slides = document.getElementsByClassName("carousel-slide");
-
-        if (n >= slides.length) {
-          currentSlide = 0;
-        } else if (n < 0) {
-          currentSlide = slides.length - 1;
-        } else {
-          currentSlide = n;
-        }
-
-        for (let i = 0; i < slides.length; i++) {
-          slides[i].style.transform = `translateX(-${currentSlide * 33.33}%)`;
-        }
+    <style>
+      #carousel-container {
+        width: 100%;
+        overflow: hidden;
       }
 
-      document.getElementById("prevBtn").addEventListener("click", function () {
-        showSlide(currentSlide - 1);
+      #carousel {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .card {
+        width: 50%;
+        flex: 0 0 auto;
+        margin: 0 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="carousel-container">
+      <div id="carousel">
+        <div class="card">
+          <div class="card__image">
+            <img src="like-water-for-chocolate.png" alt="Slide 1" />
+          </div>
+          <div class="card__content">
+            <div class="card__heading">
+              <h2 class="card__album--title">For Emma, Forever Ago</h2>
+              <span class="card__artist--name">Bon Iver</span>
+            </div>
+            <p class="card__text">
+              For Emma, Forever Ago is the debut studio album by American indie
+              folk band Bon Iver. It was first self-released in July 2007, and
+              later saw wide release on the Jagjaguwar label in February 2008.
+              The album is principally the work of singer-songwriter Justin
+              Vernon. Whilst living in Raleigh, North Carolina, Vernon fell ill
+              with mononucleosis and a ...
+              <!-- liver infection, and grew frustrated with his songwriting and life. He
+          left Raleigh and drove an hour northwest of his hometown, Eau Claire,
+          Wisconsin, to a remote cabin in the woods belonging to his father,
+          where he spent three months writing and recording the bulk of the
+          album. The album's lyrical subjects include lost love and mediocrity.
+          Despite receiving mostly positive reviews, the album was not an
+          immediate success, failing to enter the Billboard 200 until a year
+          after its release. It reached number 29 on the UK Albums Chart, and
+          was met with critical acclaim. The album was later remastered and
+          rereleased in 2016 as a part of a series of reissues of Jagjaguwar's
+          back catalog. -->
+            </p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card__image">
+            <img src="bryson-tiller.jpg" alt="Slide 1" />
+          </div>
+          <div class="card__content">
+            <div class="card__heading">
+              <h2 class="card__album--title">For Emma, Forever Ago</h2>
+              <span class="card__artist--name">Bon Iver</span>
+            </div>
+            <p class="card__text">
+              For Emma, Forever Ago is the debut studio album by American indie
+              folk band Bon Iver. It was first self-released in July 2007, and
+              later saw wide release on the Jagjaguwar label in February 2008.
+              The album is principally the work of singer-songwriter Justin
+              Vernon. Whilst living in Raleigh, North Carolina, Vernon fell ill
+              with mononucleosis and a ...
+              <!-- liver infection, and grew frustrated with his songwriting and life. He
+          left Raleigh and drove an hour northwest of his hometown, Eau Claire,
+          Wisconsin, to a remote cabin in the woods belonging to his father,
+          where he spent three months writing and recording the bulk of the
+          album. The album's lyrical subjects include lost love and mediocrity.
+          Despite receiving mostly positive reviews, the album was not an
+          immediate success, failing to enter the Billboard 200 until a year
+          after its release. It reached number 29 on the UK Albums Chart, and
+          was met with critical acclaim. The album was later remastered and
+          rereleased in 2016 as a part of a series of reissues of Jagjaguwar's
+          back catalog. -->
+            </p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card__image">
+            <img src="for-emma-forever-ago.png" alt="Slide 1" />
+          </div>
+          <div class="card__content">
+            <div class="card__heading">
+              <h2 class="card__album--title">For Emma, Forever Ago</h2>
+              <span class="card__artist--name">Bon Iver</span>
+            </div>
+            <p class="card__text">
+              For Emma, Forever Ago is the debut studio album by American indie
+              folk band Bon Iver. It was first self-released in July 2007, and
+              later saw wide release on the Jagjaguwar label in February 2008.
+              The album is principally the work of singer-songwriter Justin
+              Vernon. Whilst living in Raleigh, North Carolina, Vernon fell ill
+              with mononucleosis and a ...
+              <!-- liver infection, and grew frustrated with his songwriting and life. He
+          left Raleigh and drove an hour northwest of his hometown, Eau Claire,
+          Wisconsin, to a remote cabin in the woods belonging to his father,
+          where he spent three months writing and recording the bulk of the
+          album. The album's lyrical subjects include lost love and mediocrity.
+          Despite receiving mostly positive reviews, the album was not an
+          immediate success, failing to enter the Billboard 200 until a year
+          after its release. It reached number 29 on the UK Albums Chart, and
+          was met with critical acclaim. The album was later remastered and
+          rereleased in 2016 as a part of a series of reissues of Jagjaguwar's
+          back catalog. -->
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const carousel = document.getElementById("carousel");
+      const cards = document.querySelectorAll(".card");
+
+      let currentIndex = 1; // Start with the middle card
+
+      function updateCarousel() {
+        const cardWidth = cards[0].offsetWidth + 20; // Adjust for margin
+        const offset = -currentIndex * cardWidth;
+        carousel.style.transform = `translateX(${offset}px)`;
+      }
+
+      function moveLeft() {
+        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+        updateCarousel();
+      }
+
+      function moveRight() {
+        currentIndex = (currentIndex + 1) % cards.length;
+        updateCarousel();
+      }
+
+      // Handle left and right arrow key presses
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          moveLeft();
+        } else if (event.key === "ArrowRight") {
+          moveRight();
+        }
       });
 
-      document.getElementById("nextBtn").addEventListener("click", function () {
-        showSlide(currentSlide + 1);
-      });
+      // You can also add buttons or other UI elements to trigger movement
     </script>
   </body>
 </html>
