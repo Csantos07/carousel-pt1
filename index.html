@@ -15,9 +15,24 @@
       }
 
       .card {
-        width: 50%;
+        width: 40%; /* Adjust the width based on your preference */
         flex: 0 0 auto;
         margin: 0 10px;
+        opacity: 0.5; /* Set opacity to make non-visible cards less prominent */
+      }
+
+      .card.active {
+        opacity: 1; /* Set opacity to fully visible for the active card */
+      }
+
+      .card__image {
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .card__image img {
+        width: 100%;
+        height: auto;
       }
     </style>
   </head>
@@ -29,29 +44,7 @@
             <img src="like-water-for-chocolate.png" alt="Slide 1" />
           </div>
           <div class="card__content">
-            <div class="card__heading">
-              <h2 class="card__album--title">For Emma, Forever Ago</h2>
-              <span class="card__artist--name">Bon Iver</span>
-            </div>
-            <p class="card__text">
-              For Emma, Forever Ago is the debut studio album by American indie
-              folk band Bon Iver. It was first self-released in July 2007, and
-              later saw wide release on the Jagjaguwar label in February 2008.
-              The album is principally the work of singer-songwriter Justin
-              Vernon. Whilst living in Raleigh, North Carolina, Vernon fell ill
-              with mononucleosis and a ...
-              <!-- liver infection, and grew frustrated with his songwriting and life. He
-          left Raleigh and drove an hour northwest of his hometown, Eau Claire,
-          Wisconsin, to a remote cabin in the woods belonging to his father,
-          where he spent three months writing and recording the bulk of the
-          album. The album's lyrical subjects include lost love and mediocrity.
-          Despite receiving mostly positive reviews, the album was not an
-          immediate success, failing to enter the Billboard 200 until a year
-          after its release. It reached number 29 on the UK Albums Chart, and
-          was met with critical acclaim. The album was later remastered and
-          rereleased in 2016 as a part of a series of reissues of Jagjaguwar's
-          back catalog. -->
-            </p>
+            <!-- Your existing content -->
           </div>
         </div>
         <div class="card">
@@ -59,29 +52,7 @@
             <img src="bryson-tiller.jpg" alt="Slide 1" />
           </div>
           <div class="card__content">
-            <div class="card__heading">
-              <h2 class="card__album--title">For Emma, Forever Ago</h2>
-              <span class="card__artist--name">Bon Iver</span>
-            </div>
-            <p class="card__text">
-              For Emma, Forever Ago is the debut studio album by American indie
-              folk band Bon Iver. It was first self-released in July 2007, and
-              later saw wide release on the Jagjaguwar label in February 2008.
-              The album is principally the work of singer-songwriter Justin
-              Vernon. Whilst living in Raleigh, North Carolina, Vernon fell ill
-              with mononucleosis and a ...
-              <!-- liver infection, and grew frustrated with his songwriting and life. He
-          left Raleigh and drove an hour northwest of his hometown, Eau Claire,
-          Wisconsin, to a remote cabin in the woods belonging to his father,
-          where he spent three months writing and recording the bulk of the
-          album. The album's lyrical subjects include lost love and mediocrity.
-          Despite receiving mostly positive reviews, the album was not an
-          immediate success, failing to enter the Billboard 200 until a year
-          after its release. It reached number 29 on the UK Albums Chart, and
-          was met with critical acclaim. The album was later remastered and
-          rereleased in 2016 as a part of a series of reissues of Jagjaguwar's
-          back catalog. -->
-            </p>
+            <!-- Your existing content -->
           </div>
         </div>
         <div class="card">
@@ -89,29 +60,7 @@
             <img src="for-emma-forever-ago.png" alt="Slide 1" />
           </div>
           <div class="card__content">
-            <div class="card__heading">
-              <h2 class="card__album--title">For Emma, Forever Ago</h2>
-              <span class="card__artist--name">Bon Iver</span>
-            </div>
-            <p class="card__text">
-              For Emma, Forever Ago is the debut studio album by American indie
-              folk band Bon Iver. It was first self-released in July 2007, and
-              later saw wide release on the Jagjaguwar label in February 2008.
-              The album is principally the work of singer-songwriter Justin
-              Vernon. Whilst living in Raleigh, North Carolina, Vernon fell ill
-              with mononucleosis and a ...
-              <!-- liver infection, and grew frustrated with his songwriting and life. He
-          left Raleigh and drove an hour northwest of his hometown, Eau Claire,
-          Wisconsin, to a remote cabin in the woods belonging to his father,
-          where he spent three months writing and recording the bulk of the
-          album. The album's lyrical subjects include lost love and mediocrity.
-          Despite receiving mostly positive reviews, the album was not an
-          immediate success, failing to enter the Billboard 200 until a year
-          after its release. It reached number 29 on the UK Albums Chart, and
-          was met with critical acclaim. The album was later remastered and
-          rereleased in 2016 as a part of a series of reissues of Jagjaguwar's
-          back catalog. -->
-            </p>
+            <!-- Your existing content -->
           </div>
         </div>
       </div>
@@ -119,27 +68,37 @@
 
     <script>
       const carousel = document.getElementById("carousel");
-      const cards = document.querySelectorAll(".card");
-
-      let currentIndex = 1; // Start with the middle card
-
-      function updateCarousel() {
-        const cardWidth = cards[0].offsetWidth + 20; // Adjust for margin
-        const offset = -currentIndex * cardWidth;
-        carousel.style.transform = `translateX(${offset}px)`;
-      }
+      const cardWidth = document.querySelector(".card").offsetWidth + 20; // Adjust for margin
 
       function moveLeft() {
-        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-        updateCarousel();
+        carousel.style.transition = "transform 0.5s ease-in-out";
+        carousel.style.transform = `translateX(${-cardWidth}px)`;
+        setTimeout(() => {
+          carousel.appendChild(carousel.firstElementChild.cloneNode(true));
+          carousel.removeChild(carousel.firstElementChild);
+          carousel.style.transition = "none";
+          carousel.style.transform = "translateX(0)";
+          setTimeout(() => {
+            carousel.style.transition = "transform 0.5s ease-in-out";
+          }, 0);
+        }, 500); // Adjust timing to match transition duration
       }
 
       function moveRight() {
-        currentIndex = (currentIndex + 1) % cards.length;
-        updateCarousel();
+        carousel.style.transition = "none";
+        carousel.style.transform = `translateX(${-cardWidth}px)`;
+        setTimeout(() => {
+          carousel.insertBefore(
+            carousel.lastElementChild.cloneNode(true),
+            carousel.firstElementChild
+          );
+          carousel.removeChild(carousel.lastElementChild);
+          carousel.style.transition = "transform 0.5s ease-in-out";
+          carousel.style.transform = "translateX(0)";
+        }, 0);
       }
 
-      // Handle left and right arrow key presses
+      // Trigger the functions based on user input (e.g., arrow keys)
       document.addEventListener("keydown", (event) => {
         if (event.key === "ArrowLeft") {
           moveLeft();
@@ -147,8 +106,6 @@
           moveRight();
         }
       });
-
-      // You can also add buttons or other UI elements to trigger movement
     </script>
   </body>
 </html>
