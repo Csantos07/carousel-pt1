@@ -11,18 +11,19 @@
 
       #carousel {
         display: flex;
-        transition: transform 0.5s ease-in-out;
+        transition: transform 1s ease-in-out;
       }
 
       .card {
-        width: 40%; /* Adjust the width based on your preference */
+        width: 40%;
         flex: 0 0 auto;
         margin: 0 10px;
-        opacity: 0.5; /* Set opacity to make non-visible cards less prominent */
+        opacity: 0.5;
+        transition: opacity 0.5s ease-in-out;
       }
 
       .card.active {
-        opacity: 1; /* Set opacity to fully visible for the active card */
+        opacity: 1;
       }
 
       .card__image {
@@ -39,6 +40,15 @@
   <body>
     <div id="carousel-container">
       <div id="carousel">
+        <!-- Extra cards to the left -->
+        <div class="card">
+          <div class="card__image">
+            <img src="for-emma-forever-ago.png" alt="Slide 3" />
+          </div>
+          <div class="card__content">
+            <!-- Your existing content -->
+          </div>
+        </div>
         <div class="card">
           <div class="card__image">
             <img src="like-water-for-chocolate.png" alt="Slide 1" />
@@ -47,9 +57,11 @@
             <!-- Your existing content -->
           </div>
         </div>
+
+        <!-- Original three center cards -->
         <div class="card">
           <div class="card__image">
-            <img src="bryson-tiller.jpg" alt="Slide 1" />
+            <img src="bryson-tiller.jpg" alt="Slide 2" />
           </div>
           <div class="card__content">
             <!-- Your existing content -->
@@ -57,7 +69,33 @@
         </div>
         <div class="card">
           <div class="card__image">
-            <img src="for-emma-forever-ago.png" alt="Slide 1" />
+            <img src="for-emma-forever-ago.png" alt="Slide 3" />
+          </div>
+          <div class="card__content">
+            <!-- Your existing content -->
+          </div>
+        </div>
+        <div class="card">
+          <div class="card__image">
+            <img src="like-water-for-chocolate.png" alt="Slide 1" />
+          </div>
+          <div class="card__content">
+            <!-- Your existing content -->
+          </div>
+        </div>
+
+        <!-- Extra cards to the right -->
+        <div class="card">
+          <div class="card__image">
+            <img src="bryson-tiller.jpg" alt="Slide 2" />
+          </div>
+          <div class="card__content">
+            <!-- Your existing content -->
+          </div>
+        </div>
+        <div class="card">
+          <div class="card__image">
+            <img src="for-emma-forever-ago.png" alt="Slide 3" />
           </div>
           <div class="card__content">
             <!-- Your existing content -->
@@ -68,50 +106,39 @@
 
     <script>
       const carousel = document.getElementById("carousel");
-      const cardWidth = document.querySelector(".card").offsetWidth + 20; // Adjust for margin
-      const initialOffset = cardWidth / 3; // Adjust the initial offset as needed
-
-      // Initialize starting position
-      carousel.style.transition = "none";
-      carousel.style.transform = `translateX(-${initialOffset}px)`;
-
-      // Use transitionend for smoother animation
-      carousel.addEventListener(
-        "transitionend",
-        () => {
-          carousel.style.transition = "none";
-          carousel.style.transform = "translateX(0)";
-          requestAnimationFrame(() => {
-            carousel.style.transition = "transform 0.5s ease-in-out";
-          });
-        },
-        { once: true }
-      );
+      const cardWidth = document.querySelector(".card").offsetWidth + 20;
 
       function moveLeft() {
-        carousel.style.transition = "transform 0.5s ease-in-out";
-        carousel.style.transform = `translateX(${-initialOffset}px)`;
-        requestAnimationFrame(() => {
-          carousel.appendChild(carousel.firstElementChild.cloneNode(true));
-          carousel.removeChild(carousel.firstElementChild);
-        });
-      }
-
-      function moveRight() {
-        carousel.style.transition = "none";
-        carousel.style.transform = `translateX(${-initialOffset}px)`;
+        carousel.style.transition = "transform 1s ease-in-out";
+        carousel.style.transform = `translateX(-${cardWidth}px)`;
         setTimeout(() => {
+          carousel.style.transition = "none";
           carousel.insertBefore(
             carousel.lastElementChild.cloneNode(true),
             carousel.firstElementChild
           );
           carousel.removeChild(carousel.lastElementChild);
-          carousel.style.transition = "transform 0.5s ease-in-out";
           carousel.style.transform = "translateX(0)";
-        }, 0);
+          requestAnimationFrame(() => {
+            carousel.style.transition = "transform 1s ease-in-out";
+          });
+        }, 1000);
       }
 
-      // Trigger the functions based on user input (e.g., arrow keys)
+      function moveRight() {
+        carousel.style.transition = "transform 1s ease-in-out";
+        carousel.style.transform = `translateX(-${cardWidth}px)`;
+        setTimeout(() => {
+          carousel.style.transition = "none";
+          carousel.appendChild(carousel.firstElementChild.cloneNode(true));
+          carousel.removeChild(carousel.firstElementChild);
+          carousel.style.transform = "translateX(0)";
+          requestAnimationFrame(() => {
+            carousel.style.transition = "transform 1s ease-in-out";
+          });
+        }, 1000);
+      }
+
       document.addEventListener("keydown", (event) => {
         if (event.key === "ArrowLeft") {
           moveLeft();
