@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="carousel-container">
+      <div class="carousel-slide">
+        <img src="for-emma-forever-ago.png" alt="Slide 1" />
+      </div>
+      <div class="carousel-slide">
+        <img src="bryson-tiller.jpg" alt="Slide 2" />
+      </div>
+      <div class="carousel-slide">
+        <img src="like-water-for-chocolate.png" alt="Slide 3" />
+      </div>
+    </div>
+    <button id="prevBtn">Previous</button>
+    <button id="nextBtn">Next</button>
+
+    <script>
+      let currentSlide = 0;
+
+      document.addEventListener("DOMContentLoaded", function () {
+        showSlide(currentSlide);
+      });
+
+      function showSlide(n) {
+        const slides = document.getElementsByClassName("carousel-slide");
+
+        if (n >= slides.length) {
+          currentSlide = 0;
+        } else if (n < 0) {
+          currentSlide = slides.length - 1;
+        } else {
+          currentSlide = n;
+        }
+
+        for (let i = 0; i < slides.length; i++) {
+          slides[i].style.transform = `translateX(-${currentSlide * 33.33}%)`;
+        }
+      }
+
+      document.getElementById("prevBtn").addEventListener("click", function () {
+        showSlide(currentSlide - 1);
+      });
+
+      document.getElementById("nextBtn").addEventListener("click", function () {
+        showSlide(currentSlide + 1);
+      });
+    </script>
+  </body>
+</html>

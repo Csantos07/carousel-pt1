@@ -1,0 +1,38 @@
+.carousel-container {
+  width: 80%;
+  overflow: hidden;
+  margin: auto;
+  display: flex;
+}
+
+.carousel-slide {
+  flex: 0 0 33.33%;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: auto;
+}
+
+button {
+  margin-top: 10px;
+}
+.carousel-container {
+  width: 80%;
+  overflow: hidden;
+  margin: auto;
+  display: flex;
+}
+
+.carousel-slide {
+  flex: 0 0 33.33%;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: auto;
+}
+
+button {
+  margin-top: 10px;
+}
